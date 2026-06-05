@@ -24,9 +24,9 @@ export default function Hero() {
           className="mb-6 flex flex-wrap justify-center gap-3"
         >
           {[
-            { icon: "★", label: "4.5 Rating" },
-            { icon: null, label: "48+ Reviews" },
-            { icon: null, label: "Open Until 10 PM" },
+            { icon: "★", label: `${salon.rating} Rating` },
+            { icon: null, label: `${salon.reviewCount}+ Reviews` },
+            { icon: null, label: salon.hours },
           ].map((badge) => (
             <div
               key={badge.label}

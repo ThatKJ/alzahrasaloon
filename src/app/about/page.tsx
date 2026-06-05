@@ -13,6 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <div className="h-20" />
+      <h1 className="sr-only">About Al Zahra Beauty Center | Ladies Salon in Sharjah</h1>
       <About />
       <WhyChooseUs />
       <BridalBanner />

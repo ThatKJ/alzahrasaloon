@@ -11,6 +11,7 @@ export default function GalleryPage() {
   return (
     <>
       <div className="h-20" />
+      <h1 className="sr-only">Salon Gallery Sharjah | Before & After – Al Zahra Beauty Center</h1>
       <Gallery />
     </>
   );

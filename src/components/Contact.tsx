@@ -1,9 +1,28 @@
 "use client";
 
+import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { salon } from "@/lib/config";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent(
+      `Hi, I would like to inquire about a booking.%0AName: ${formData.name}%0APhone: ${formData.phone}%0AService: ${formData.service || "Not specified"}%0AMessage: ${formData.message}`
+    );
+    window.open(
+      `https://wa.me/${salon.phone.replace(/\D/g, "")}?text=${text}`,
+      "_blank"
+    );
+  };
+
   return (
     <section className="py-section-gap bg-surface-container-low" id="contact">
       <div className="max-w-7xl mx-auto px-container-margin">
@@ -107,8 +126,8 @@ export default function Contact() {
 
               {/* Contact Form */}
               <form
+                onSubmit={handleSubmit}
                 className="space-y-5 bg-surface p-8 rounded-3xl shadow-soft"
-                onSubmit={(e) => e.preventDefault()}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
@@ -116,15 +135,29 @@ export default function Contact() {
                     placeholder="Full Name"
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                   />
                   <input
                     className="w-full bg-surface-container-low border-0 border-b border-outline-variant focus:border-b-2 focus:border-primary outline-none p-4 rounded-xl text-sm font-body-md transition-all"
                     placeholder="Phone Number"
                     type="tel"
                     required
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                   />
                 </div>
-                <select className="w-full bg-surface-container-low border-0 border-b border-outline-variant focus:border-b-2 focus:border-primary outline-none p-4 rounded-xl text-sm font-body-md transition-all appearance-none text-on-surface-variant">
+                <select
+                  className="w-full bg-surface-container-low border-0 border-b border-outline-variant focus:border-b-2 focus:border-primary outline-none p-4 rounded-xl text-sm font-body-md transition-all appearance-none text-on-surface-variant"
+                  value={formData.service}
+                  onChange={(e) =>
+                    setFormData({ ...formData, service: e.target.value })
+                  }
+                >
                   <option value="">Select Service</option>
                   <option value="hair">Hair Styling</option>
                   <option value="bridal">Bridal Makeup</option>
@@ -137,6 +170,10 @@ export default function Contact() {
                   className="w-full bg-surface-container-low border-0 border-b border-outline-variant focus:border-b-2 focus:border-primary outline-none p-4 rounded-xl text-sm font-body-md transition-all resize-none"
                   placeholder="Your Message"
                   rows={4}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                 />
                 <button
                   type="submit"

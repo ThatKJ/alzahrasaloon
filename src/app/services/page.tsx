@@ -13,6 +13,7 @@ export default function ServicesPage() {
   return (
     <>
       <div className="h-20" />
+      <h1 className="sr-only">Beauty Services in Sharjah | Hair, Facial & Bridal – Al Zahra Beauty Center</h1>
       <Services />
       <BridalBanner />
       <SpecialOffers />
